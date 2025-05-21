@@ -1,4 +1,4 @@
-name: SonarQube Scan - dcm4che-core
+name: SonarCloud Scan - dcm4che-core
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   sonar:
-    name: Run SonarQube on dcm4che-core
+    name: Run SonarCloud on dcm4che-core
     runs-on: ubuntu-latest
 
     steps:
@@ -25,16 +25,18 @@ jobs:
       - name: Build only dcm4che-core module
         run: mvn clean install --projects dcm4che-core --also-make -DskipTests
 
-      - name: Run SonarQube analysis using Maven plugin on dcm4che-core
+      - name: Run SonarCloud analysis using Maven plugin on dcm4che-core
         working-directory: dcm4che-core
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.projectKey=dcm4che-core \
+            -Dsonar.projectKey=sonamsuragini2_myorg-dcm4che-core \
+            -Dsonar.organization=sonamsuragini2 \
             -Dsonar.sources=src/main/java \
             -Dsonar.tests=src/test/java \
             -Dsonar.java.binaries=target/classes \
             -Dsonar.projectBaseDir=$(pwd) \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
+            -Dsonar.login=$SONAR_TOKEN \
+            -Dsonar.branch.name=${GITHUB_REF#refs/heads/}
