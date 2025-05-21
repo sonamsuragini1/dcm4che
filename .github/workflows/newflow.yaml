@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - 5.25.0-branch
   pull_request:
 
 jobs:
