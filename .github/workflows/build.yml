@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - generic-config
+      - 5.25.0-branch
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
