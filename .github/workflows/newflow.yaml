@@ -1,15 +1,16 @@
-name: SonarCloud Scan - dcm4che-core only
+name: SonarCloud Scan - dcm4che-core
 
 on:
   push:
     branches:
-      - main
       - 5.25.0-branch
   pull_request:
+    branches:
+      - 5.25.0-branch
 
 jobs:
   sonar:
-    name: Run SonarCloud on dcm4che-core
+    name: Run SonarCloud analysis on dcm4che-core
     runs-on: ubuntu-latest
 
     steps:
@@ -39,4 +40,4 @@ jobs:
             -Dsonar.projectBaseDir=$(pwd) \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN \
-            -Dsonar.branch.name=${GITHUB_REF#refs/heads/}
+            -Dsonar.branch.name=5.25.0-branch
