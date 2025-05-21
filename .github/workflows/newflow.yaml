@@ -25,16 +25,16 @@ jobs:
       - name: Build only dcm4che-core module
         run: mvn clean install --projects dcm4che-core --also-make -DskipTests
 
-      - name: Run Sonar Scanner on dcm4che-core
+      - name: Run SonarQube analysis using Maven plugin on dcm4che-core
         working-directory: dcm4che-core
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          sonar-scanner \
+          mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=dcm4che-core \
             -Dsonar.sources=src/main/java \
             -Dsonar.tests=src/test/java \
             -Dsonar.java.binaries=target/classes \
-            -Dsonar.projectBaseDir=. \
-            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.projectBaseDir=$(pwd) \
+            -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN
