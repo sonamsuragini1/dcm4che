@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - 5.25.0-branch
+      - main
   pull_request:
     branches:
       - 5.25.0-branch
+      - main
 
 jobs:
   sonar:
@@ -40,4 +42,4 @@ jobs:
             -Dsonar.projectBaseDir=$(pwd) \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=$SONAR_TOKEN \
-            -Dsonar.branch.name=5.25.0-branch
+            -Dsonar.branch.name=main
