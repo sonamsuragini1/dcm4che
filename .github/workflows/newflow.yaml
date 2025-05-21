@@ -1,9 +1,9 @@
-name: SonarQube Scan - dcm4che-core
-
+name: Build
 on:
   push:
     branches:
-      - main
+      - master
+      - generic-config
   pull_request:
 
 jobs:
