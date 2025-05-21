@@ -1,4 +1,4 @@
-name: SonarCloud Scan - dcm4che-core
+name: SonarCloud Scan - dcm4che-core only
 
 on:
   push:
